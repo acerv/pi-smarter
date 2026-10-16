@@ -1,0 +1,38 @@
+{
+  "name": "pi-smarter",
+  "version": "0.1.0",
+  "description": "Smart extensions, Linux kernel workflow tools, and themes for Pi coding agent",
+  "type": "module",
+  "keywords": [
+    "pi-package"
+  ],
+  "author": "Andrea Cervesato <andrea.cervesato@mailbox.org>",
+  "license": "MIT",
+  "pi": {
+    "extensions": [
+      "./extensions/syzkaller.ts",
+      "./extensions/lore.ts",
+      "./extensions/patchwork.ts",
+      "./extensions/antigravity-footer.ts"
+    ],
+    "themes": [
+      "./themes/tokyo-night.json"
+    ]
+  },
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "peerDependencies": {
+    "@earendil-works/pi-coding-agent": "*",
+    "@earendil-works/pi-tui": "*",
+    "typebox": "*"
+  },
+  "devDependencies": {
+    "@earendil-works/pi-ai": "^1.3.0",
+    "@earendil-works/pi-coding-agent": "^1.3.0",
+    "@earendil-works/pi-tui": "^1.3.0",
+    "@types/node": "^22.0.0",
+    "typebox": "^1.0.0",
+    "typescript": "^5.6.0"
+  }
+}
