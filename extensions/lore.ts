@@ -402,6 +402,12 @@ async function fetchLorePatchesList(options: {
 		});
 
 		if (!res.ok) {
+			if (res.status === 404) {
+				const errorBody = await res.text().catch(() => "");
+				if (errorBody.includes("No results found") || offset > 0) {
+					return { items: [], pageCount: 0, feedUrl };
+				}
+			}
 			throw new Error(`HTTP ${res.status} (${res.statusText}) fetching ${feedUrl}`);
 		}
 
