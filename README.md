@@ -41,12 +41,16 @@ Interact with Linux kernel mailing lists on [lore.kernel.org](https://lore.kerne
 
 ### 3. 🧩 Patchwork (`extensions/patchwork.ts`)
 Seamless integration with Patchwork instances (e.g. `patchwork.kernel.org`, LTP Patchwork).
-- **Series Resolution (`patchwork_fetch_series`)**: Resolves any standalone patch URL or cover letter into the complete series.
+- **List Patches (`patchwork_list_patches`)**: Browse recent patch submissions by subsystem or project (e.g. `ltp`, `netdev`, `bpf`, `arm`, `fs`, `mm`, `all`). Shows patches from today & yesterday by default with automatic fallback to recent submissions.
+- **Series Resolution & Deep Dive (`patchwork_read_patch` / `patchwork_fetch_series`)**: Resolves any patch URL, numeric patch/series ID (e.g. `14894280`), or Message-ID into the complete series.
 - **Full Review Context**: Fetches all patches, commit messages, diffs, and discussion comments.
-- **Slash Command**:
+- **Slash Commands**:
   ```bash
+  /patchwork list ltp             # Recent patches from today and yesterday
+  /patchwork list ltp 30          # Last 30 patches from LTP
+  /patchwork list netdev 50 tcp   # 50 recent TCP patches on netdev
+  /patchwork read 14894280        # Deep dive into patch ID 14894280
   /patchwork https://patchwork.kernel.org/project/ltp/patch/as9x2R-9IQb7vjn7@toolbx/
-  /patchwork https://patchwork.kernel.org/series/1185538/
   ```
 
 ---
