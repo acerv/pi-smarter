@@ -14,12 +14,12 @@ It includes:
 pi install git:github.com/cervesato/pi-smarter
 ```
 
-Or for local development:
+Or for local development and companion setup:
 
 ```bash
 git clone https://github.com/cervesato/pi-smarter.git
 cd pi-smarter
-pi install .
+./setup.sh
 ```
 
 To test an extension without installing:
