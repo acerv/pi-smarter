@@ -18,7 +18,7 @@
       "./extensions/save-tokens.ts"
     ],
     "themes": [
-      "./themes/tokyo-night.json"
+      "./themes/tokyonight.json"
     ]
   },
   "scripts": {

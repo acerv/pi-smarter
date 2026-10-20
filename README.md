@@ -97,7 +97,7 @@ Toggle terse output mode to optimize for fewer output tokens:
 Includes the Tokyo Night dark theme:
 
 ```bash
-pi /theme tokyo-night
+pi /theme tokyonight
 ```
 
 ## License
