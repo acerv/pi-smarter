@@ -11,6 +11,7 @@ npm:pi-web-access
 npm:pi-manage-todo-list
 npm:pi-subagents
 npm:pi-mcp-adapter
+npm:@narumitw/pi-plan-mode
 "
 
 echo "Installing companion packages..."
