@@ -5,6 +5,7 @@ It includes:
 
 - Linux kernel development tools
 - Workflow guidelines
+- Token-saving mode
 - Antigravity status footer
 - Tokyo Night theme
 
@@ -79,6 +80,17 @@ Multi-line footer widget displaying:
 
 Automatically injects project workflow guidelines and conventions
 (found in `rules/guidelines.md`) into every session's agent context.
+
+### Save Tokens (`/save_tokens`)
+
+Toggle terse output mode to optimize for fewer output tokens:
+
+```bash
+/save_tokens          # Toggle on/off
+/save_tokens on       # Enable terse mode
+/save_tokens off      # Disable terse mode
+/save_tokens status   # Show current status
+```
 
 ## Theme
 

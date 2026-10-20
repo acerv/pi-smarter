@@ -14,7 +14,8 @@
       "./extensions/lore.ts",
       "./extensions/patchwork.ts",
       "./extensions/antigravity-footer.ts",
-      "./extensions/guidelines.ts"
+      "./extensions/guidelines.ts",
+      "./extensions/save-tokens.ts"
     ],
     "themes": [
       "./themes/tokyo-night.json"
