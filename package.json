@@ -13,7 +13,8 @@
       "./extensions/syzkaller.ts",
       "./extensions/lore.ts",
       "./extensions/patchwork.ts",
-      "./extensions/antigravity-footer.ts"
+      "./extensions/antigravity-footer.ts",
+      "./extensions/guidelines.ts"
     ],
     "themes": [
       "./themes/tokyo-night.json"

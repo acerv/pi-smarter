@@ -4,6 +4,7 @@ A set of [Pi](https://pi.dev) harness customizations for my workflow.
 It includes:
 
 - Linux kernel development tools
+- Workflow guidelines
 - Antigravity status footer
 - Tokyo Night theme
 
@@ -73,6 +74,11 @@ Multi-line footer widget displaying:
 /antigravity.footer toggle    # Enable or disable footer
 /antigravity.footer refresh   # Manually refresh quota
 ```
+
+### Workflow Guidelines
+
+Automatically injects project workflow guidelines and conventions
+(found in `rules/guidelines.md`) into every session's agent context.
 
 ## Theme
 
