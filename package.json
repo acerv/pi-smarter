@@ -15,7 +15,8 @@
       "./extensions/patchwork.ts",
       "./extensions/antigravity-footer.ts",
       "./extensions/guidelines.ts",
-      "./extensions/save-tokens.ts"
+      "./extensions/save-tokens.ts",
+      "./extensions/safety-gate.ts"
     ],
     "themes": [
       "./themes/tokyonight.json"
