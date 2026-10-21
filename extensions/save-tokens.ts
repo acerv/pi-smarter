@@ -15,7 +15,13 @@ const TERSE_INSTRUCTIONS = [
 ].join("\n");
 
 export default function activate(pi: ExtensionAPI): void {
-	let terse = false;
+	let terse = true;
+
+	pi.on("session_start", (_event, ctx) => {
+		if (ctx.hasUI) {
+			ctx.ui.setStatus("save_tokens", terse ? "💸 save_tokens" : "");
+		}
+	});
 
 	pi.on("before_agent_start", async (event) => {
 		if (!terse) return;
