@@ -240,17 +240,11 @@ export default function (pi: ExtensionAPI) {
 					if (!footerEnabled) return [];
 
 					// 1. Gather session usage totals
-					let inputTokens = 0;
-					let outputTokens = 0;
-					let cacheReadTokens = 0;
 					let cost = 0;
 
 					for (const entry of ctx.sessionManager.getBranch()) {
 						if (entry.type === "message" && (entry.message as any).role === "assistant") {
 							const m = entry.message as AssistantMessage;
-							inputTokens += m.usage.input;
-							outputTokens += m.usage.output;
-							cacheReadTokens += m.usage.cacheRead;
 							cost += m.usage.cost.total;
 						}
 					}
@@ -264,12 +258,28 @@ export default function (pi: ExtensionAPI) {
 
 					const pwdLine = truncateToWidth(theme.fg("dim", pwd), width, theme.fg("dim", "..."));
 
-					// 3. Line 2: Stats (Tokens + Quota/Cost + Context) & Model
+					// 3. Line 2: Stats (Context + Quota/Cost) & Model
 					const statsParts: string[] = [];
 
-					if (inputTokens > 0) statsParts.push(`↑${formatTokens(inputTokens)}`);
-					if (outputTokens > 0) statsParts.push(`↓${formatTokens(outputTokens)}`);
-					if (cacheReadTokens > 0) statsParts.push(`R${formatTokens(cacheReadTokens)}`);
+					// Context usage tokens, percentage & window limit
+					const contextUsage = ctx.getContextUsage();
+					const contextWindow = contextUsage?.contextWindow ?? ctx.model?.contextWindow ?? 0;
+					const currentTokens = contextUsage?.tokens ?? 0;
+					const contextPercentVal = contextUsage?.percent ?? 0;
+
+					const contextDisplay = currentTokens > 0
+						? `${formatTokens(currentTokens)}/${formatTokens(contextWindow)} (${contextPercentVal.toFixed(1)}%)`
+						: (contextUsage?.percent !== null
+							? `${contextPercentVal.toFixed(1)}%/${formatTokens(contextWindow)}`
+							: `?/${formatTokens(contextWindow)}`);
+
+					if (contextPercentVal > 90) {
+						statsParts.push(theme.fg("error", contextDisplay));
+					} else if (contextPercentVal > 70) {
+						statsParts.push(theme.fg("warning", contextDisplay));
+					} else {
+						statsParts.push(theme.fg("dim", contextDisplay));
+					}
 
 					const activeModel = ctx.model;
 					const isAntigravity = activeModel?.provider === "antigravity";
@@ -320,21 +330,7 @@ export default function (pi: ExtensionAPI) {
 						}
 					}
 
-					// Context usage percentage & window limit
-					const contextUsage = ctx.getContextUsage();
-					const contextWindow = contextUsage?.contextWindow ?? activeModel?.contextWindow ?? 0;
-					const contextPercentVal = contextUsage?.percent ?? 0;
-					const contextDisplay = contextUsage?.percent !== null
-						? `${contextPercentVal.toFixed(1)}%/${formatTokens(contextWindow)}`
-						: `?/${formatTokens(contextWindow)}`;
 
-					if (contextPercentVal > 90) {
-						statsParts.push(theme.fg("error", contextDisplay));
-					} else if (contextPercentVal > 70) {
-						statsParts.push(theme.fg("warning", contextDisplay));
-					} else {
-						statsParts.push(theme.fg("dim", contextDisplay));
-					}
 
 					let statsLeft = statsParts.join(" ");
 					let statsLeftWidth = visibleWidth(statsLeft);
